@@ -1,7 +1,12 @@
 package org.example;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.locators.RelativeLocator;
+
+import java.util.List;
 
 public class DriverDemo {
 
@@ -13,8 +18,28 @@ public class DriverDemo {
         return  title;
     }
     public static void main(String[] args) {
-        String googleUrl = "https://www.google.com/";
-        System.out.println(getTitle(googleUrl));
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://practicetestautomation.com/practice-test-login/");
+
+        // Using different types of Locators in Selenium Web Driver
+
+        WebElement usernameInputField = driver.findElement(By.id("username"));
+        WebElement passwordInputField = driver.findElement(By.name("password"));
+        WebElement submitBtn = driver.findElement(By.className("btn"));
+
+        // Getting all elements by tag type
+        List<WebElement> inputFields = driver.findElements(By.tagName("input"));
+
+        // Link and Partial Link Text
+        WebElement footerLink = driver.findElement(By.linkText("Practice Test Automation"));
+        WebElement footerPartialLink = driver.findElement(By.partialLinkText("Test Automation"));
+
+        // Locating elements using RelativeLocator
+        WebElement relativePasswordLocate = driver.findElement(RelativeLocator.with(By.tagName("input")).below(By.id("username")));
+        WebElement relativeFooterLinkLocate = driver.findElement(RelativeLocator.with(By.tagName("a")).toRightOf(By.linkText("Practice Test Automation")));
+
+
+
     }
 
 
