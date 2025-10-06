@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.locators.RelativeLocator;
 
+import java.sql.Driver;
 import java.util.List;
 
 public class DriverDemo {
@@ -17,8 +18,9 @@ public class DriverDemo {
         title = driver.getTitle();
         return  title;
     }
-    public static void main(String[] args) {
-        WebDriver driver = new ChromeDriver();
+
+    private static void findExceptionPageElements(WebDriver driver){
+
         driver.get("https://practicetestautomation.com/practice-test-login/");
 
         // Using different types of Locators in Selenium Web Driver
@@ -57,6 +59,31 @@ public class DriverDemo {
         // For comppund class names example for home button look for unique substring in classname
         // Example : class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-43" ---> "menu-item-home"
         WebElement homeButtonSelector = driver.findElement(By.className("menu-item-home"));
+
+    }
+
+    private  static void findLoginPageElements(WebDriver driver){
+            driver.get("https://practicetestautomation.com/practice-test-login/");
+
+            WebElement usernameByName = driver.findElement(By.name("username"));
+
+            // To fill data in input fields we can use the method "Send Keys"
+            usernameByName.sendKeys("student");
+
+            WebElement passwordById = driver.findElement(By.id("password"));
+            passwordById.sendKeys("Password123");
+
+
+            WebElement submitBtnByClass = driver.findElement(By.className("btn"));
+            submitBtnByClass.isDisplayed();
+            submitBtnByClass.click();
+    }
+    public static void main(String[] args) {
+
+        WebDriver driver = new ChromeDriver();
+//        findExceptionPageElements(driver);
+        findLoginPageElements(driver);
+//        driver.quit();
 
     }
 
