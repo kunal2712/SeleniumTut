@@ -4,13 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class PositiveLoginTests {
 
+    @Test
     public void testLoginFunctionality(){
         // Open page
-        WebDriver driver = new ChromeDriver();
+//        WebDriver driver = new ChromeDriver();
+        //For FireFox browser
+        WebDriver driver = new FirefoxDriver();
         driver.get("https://practicetestautomation.com/practice-test-login/");
 
         // Type username student in username field
@@ -34,6 +39,11 @@ public class PositiveLoginTests {
         String expectedMessage = "Congratulations student. You successfully logged in!";
         String pageSource = driver.getPageSource();
         Assert.assertTrue(pageSource.contains(expectedMessage));
+
+
+        // Verify log out button is displayed on next page
+        WebElement logoutButton = driver.findElement(By.linkText("Log out"));
+        Assert.assertTrue(logoutButton.isDisplayed());
 
         driver.quit();
 
